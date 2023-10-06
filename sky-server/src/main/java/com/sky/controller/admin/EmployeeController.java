@@ -81,7 +81,7 @@ public class EmployeeController {
      * @param employeeDTO
      * @return
      */
-    @PostMapping("/save")
+    @PostMapping("/")
     @ApiOperation("新增员工")
     public Result save(@RequestBody EmployeeDTO employeeDTO) {
         log.info("add employee: {}", employeeDTO);
@@ -132,7 +132,7 @@ public class EmployeeController {
      * @param employeeDTO
      * @return
      */
-    @PutMapping("/edit")
+    @PutMapping("/")
     @ApiOperation("编辑员工信息")
     public Result edit(@RequestBody EmployeeDTO employeeDTO) {
         employeeService.edit(employeeDTO);
