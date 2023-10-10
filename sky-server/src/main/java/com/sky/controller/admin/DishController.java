@@ -64,10 +64,26 @@ public class DishController {
         return Result.success();
     }
 
+    /**
+     * 根据 id 查询菜品数据
+     * @param id
+     * @return
+     */
     @GetMapping("/{id}")
     @ApiOperation(value = "根据 id 查询菜品")
     public Result<DishVO> getById(@PathVariable Long id) {
         DishVO dishVO = dishService.getByIdWithFlavor(id);
         return Result.success(dishVO);
+    }
+
+    /**
+     * 修改菜品数据
+     * @return
+     */
+    @PutMapping("/")
+    @ApiOperation(value = "修改菜品数据")
+    public Result update(@RequestBody DishDTO dishDTO) {
+        dishService.updateWithFlavor(dishDTO);
+        return Result.success();
     }
 }
