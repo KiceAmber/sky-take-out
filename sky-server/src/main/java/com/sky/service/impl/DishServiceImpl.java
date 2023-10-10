@@ -63,6 +63,11 @@ public class DishServiceImpl implements DishService {
         }
     }
 
+    /**
+     * 菜品的分页查询
+     * @param dishPageQueryDTO
+     * @return
+     */
     public PageResult pageQuery(DishPageQueryDTO dishPageQueryDTO) {
         PageHelper.startPage(dishPageQueryDTO.getPage(), dishPageQueryDTO.getPageSize());
 
@@ -70,6 +75,10 @@ public class DishServiceImpl implements DishService {
         return new PageResult(page.getTotal(), page.getResult());
     }
 
+    /**
+     * 单个/批量删除菜品数据
+     * @param ids
+     */
     @Transactional
     public void deleteBatch(List<Long> ids) {
         // 判断当前菜品是否可以删除
@@ -100,5 +109,29 @@ public class DishServiceImpl implements DishService {
 
         // 根据菜品 id 集合批量删除关联的口味数据
         dishFlavorMapper.deleteByDishIds(ids);
+    }
+
+    /**
+     * 根据 id 查询菜品以及口味数据
+     * @param id
+     * @return
+     */
+    @Transactional
+    public DishVO getByIdWithFlavor(Long id) {
+
+        // 查询菜品信息
+        Dish dish = dishMapper.getById(id);
+
+        // 获取该菜品的口味数据
+        List<DishFlavor> dishFlavors = dishFlavorMapper.getByDishId(id);
+
+        // 数据写入 DishVO 中
+        DishVO dishVO = new DishVO();
+        BeanUtils.copyProperties(dish, dishVO);
+
+        dishVO.setFlavors(dishFlavors);
+
+        // 返回 VO 数据
+        return dishVO;
     }
 }
