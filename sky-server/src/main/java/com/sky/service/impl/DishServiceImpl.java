@@ -144,6 +144,7 @@ public class DishServiceImpl implements DishService {
      * 根据 id 修改菜品信息以及口味
      * @param dishDTO
      */
+    @Transactional
     public void updateWithFlavor(DishDTO dishDTO) {
 
         Dish dish = new Dish();
@@ -170,6 +171,7 @@ public class DishServiceImpl implements DishService {
      * @param dish
      * @return
      */
+    @Transactional
     public List<DishVO> listWithFlavor(Dish dish) {
 
         List<Dish> dishList = dishMapper.list(dish);
@@ -187,5 +189,15 @@ public class DishServiceImpl implements DishService {
         }
 
         return dishVOList;
+    }
+
+    /**
+     * 菜品启售停售
+     *
+     * @param status
+     * @param id
+     */
+    public void updateStatus(Integer status, Long id) {
+        dishMapper.updateStatus(status, id);
     }
 }
