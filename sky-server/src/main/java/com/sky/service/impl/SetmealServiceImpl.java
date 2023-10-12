@@ -57,4 +57,32 @@ public class SetmealServiceImpl implements SetmealService {
     public List<DishItemVO> getDishItemById(Long id) {
         return setmealMapper.getDishItemBySetmealId(id);
     }
+
+
+    /**
+     * 新增套餐
+     * @param setmealDTO
+     */
+    @Transactional
+    public void save(SetmealDTO setmealDTO) {
+        Setmeal setmeal = new Setmeal();
+        BeanUtils.copyProperties(setmealDTO, setmeal);
+
+        // 先插入套餐数据
+        setmealMapper.insert(setmeal);
+
+        Long setmealId = setmeal.getId();
+
+        // 再插入套餐和菜品关联数据
+//        for (SetmealDish setmealDish : setmealDTO.getSetmealDishes()) {
+//            setmealDish.setSetmealId(setmealId);
+//            setmealDishMapper.insert(setmealDish);
+//        }
+        // 被批量插入套餐和菜品关联数据
+        List<SetmealDish> setmealDishes = setmealDTO.getSetmealDishes();
+        if (setmealDishes != null && setmealDishes.size() > 0) {
+            setmealDishes.forEach(setmealDish -> setmealDish.setSetmealId(setmealId));
+            setmealDishMapper.insertBatch(setmealDishes);
+        }
+    }
 }
