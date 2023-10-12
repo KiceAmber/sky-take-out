@@ -49,6 +49,6 @@
     </update>
 
     <select id="list" resultType="com.sky.entity.Dish">
-        select * from dish where status = 1 and id = #{id}
+        select * from dish where status = 1 and category_id = #{categoryId}
     </select>
 </mapper>
