@@ -46,4 +46,14 @@ sky:
     access-key-id: ${sky.alioss.access-key-id}
     access-key-secret: ${sky.alioss.access-key-secret}
     bucket-name: ${sky.alioss.bucket-name}
+#  wechat: # 微信支付相关配置
+#    appid:
+#    secret:
+#    mchid:
+#    mch-serial-no:
+#    private-key-file-path:
+#    api-v3-key:
+#    we-chat-pay-cert-file-path:
+#    notify-url:
+#    refund-notify-url:
 

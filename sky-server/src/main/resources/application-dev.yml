@@ -15,5 +15,17 @@ sky:
     host: localhost
     port: 56379
     database: 10
+#  wechat: # 配置微信支付相关功能
+#    appid:
+#    secret:
+#    mchid:
+#    mch-serial-no:
+#    private-key-file-path:
+#    api-v3-key:
+#    we-chat-pay-cert-file-path:
+#    notify-url:
+#    refund-notify-url:
+
+
 
 
