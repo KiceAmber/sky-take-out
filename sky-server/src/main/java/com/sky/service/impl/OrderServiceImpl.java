@@ -174,4 +174,22 @@ public class OrderServiceImpl implements OrderService {
         String json = JSON.toJSONString(map);
         webSocketServer.sendToAllClient(json);
     }
+
+    @Override
+    public void reminder(Long id) {
+        // 根据 id 查询订单
+        Orders order = orderMapper.getById(id);
+
+        if (order == null) {
+            throw new OrderBusinessException(MessageConstant.ORDER_STATUS_ERROR);jKW
+        }
+
+        Map map = new HashMap();
+        map.put("type", 2);
+        map.put("orderId", id);
+        map.put("content", "订单号：" + order.getNumber());
+
+        // 通过 websocket 推送消息
+        webSocketServer.sendToAllClient(JSON.toJSONString(map));
+    }
 }
