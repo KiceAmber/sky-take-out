@@ -181,7 +181,7 @@ public class OrderServiceImpl implements OrderService {
         Orders order = orderMapper.getById(id);
 
         if (order == null) {
-            throw new OrderBusinessException(MessageConstant.ORDER_STATUS_ERROR);jKW
+            throw new OrderBusinessException(MessageConstant.ORDER_STATUS_ERROR);
         }
 
         Map map = new HashMap();
